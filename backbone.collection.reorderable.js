@@ -28,17 +28,14 @@
                 this.models.splice(oldIdx, 1);
 
                 // adjust desired target if we just moved it around
-                var targetIdx = idx;
-                if (targetIdx >= oldIdx)
-                {
-                    targetIdx += 1;
-                }
+                if (idx > this.models.length) { idx = this.models.length; }
+                if (idx < 0) { idx = 0; }
 
                 // new position
-                this.models.splice(targetIdx, 0, model);
+                this.models.splice(idx, 0, model);
 
                 // inform the world
-                this.trigger('moved', model, idx);
+                this.trigger('move', model, idx);
             }
         }
     });

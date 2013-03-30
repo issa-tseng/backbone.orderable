@@ -1,0 +1,14 @@
+{
+    "name": "backbone.collection.reorderable",
+    "version": "0.1.0",
+    "author": "Clint Tseng <clint@dontexplain.com>",
+    "description": "small addition to Backbone.Collection to track user-ordering canonically.",
+    "main": "./backbone.collection.reorderable.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/clint-tseng/backbone.collection.reorderable.git"
+    },
+    "keywords": [ "backbone", "collection", "order", "reorder" ],
+    "devDependencies": [ "underscore", "backbone", "jasmine-node" ],
+    "license": "WTFPL"
+}
