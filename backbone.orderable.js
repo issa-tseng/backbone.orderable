@@ -18,6 +18,7 @@
         factory(_, Backbone);
 })(function(_, Backbone)
 {
+    // augment Collection with a method to move Models around
     var OrderableCollection = Backbone.Collection.extend({
         move: function(model, idx)
         {
@@ -39,11 +40,85 @@
             }
         }
     });
-
     Backbone.OrderableCollection = OrderableCollection;
 
+    // semi-underdefined view that ties with OrderableCollection to
+    // ease and automate both general collection view management and
+    // view movement.
+    var OrderableView = Backbone.View.extend({
+        initialize: function()
+        {
+            var self = this;
+
+            // super
+            Backbone.View.prototype.initialize.apply(this, arguments);
+
+            // keep track of the view we generate per model
+            this._views = {};
+
+            // track existing models
+            this.collection.each(function(model) { self._addOne(model); });
+
+            // handle new/removed instances
+            this.collection.on('add', function(model) { self._addOne(model); });
+            this.collection.on('move', function(model, idx) { self._move(model, idx); });
+            this.collection.on('remove', function(model) { self._removeOne(model); });
+        },
+
+        // helper method to grab rendered elements as an array. since
+        // we prerender, all we have to do is return the elements.
+        renderCollection: function()
+        {
+            return _.pluck(this._views, 'el');
+        },
+
+        // prerender and track a model
+        _addOne: function(model)
+        {
+            var view = new this.options.instanceView({ model: model });
+            this._views[model.cid] = view;
+
+            this._addOneView(view);
+            view.render();
+        },
+
+        // actually add the view to the dom. this is defined separately
+        // so that it's easy to override. if you want to eg bind drag
+        // events or add a remove button to the item, this is a great place
+        // to do it.
+        _addOneView: function(view)
+        {
+            this.$el.append(view.$el);
+        },
+
+        // this is just a default implementation of move assuming that each
+        // model's element is the direct child of the collection view. this
+        // is often not the case, so if _addOneView is overriden with other
+        // behavior this should probably be overriden as well.
+        _move: function(model, idx)
+        {
+            var modelEl = this._views[model.cid].el;
+            this.$el.find('> :nth-child(' + (idx - 1) + ')').after(modelEl);
+        },
+
+        // remove an model. pretty self-explanatory
+        _removeOne: function(model)
+        {
+            // we want to remove the model from the dom, but we don't know if
+            // the owner of the model actually wants it swept away, so simply
+            // remove the element.
+            this._views[model.cid].$el.remove();
+            delete this._views[model.cid];
+        }
+    });
+
     if (typeof module != 'undefined')
-        module.exports = OrderableCollection;
+    {
+        module.exports = {
+            OrderableCollection: OrderableCollection,
+            OrderableView: OrderableView
+        };
+    }
 
     return Backbone;
 });
