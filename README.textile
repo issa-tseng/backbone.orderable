@@ -1,0 +1,18 @@
+h1. backbone.orderable "!https://secure.travis-ci.org/clint-tseng/backbone.orderable.png!":http://travis-ci.org/clint-tseng/backbone.orderable
+
+A basic implementation for an idiom wherein the ordering of a collection is both significant and user-defined.
+
+h2. Backbone.OrderableCollection
+
+Adds a method @move(_model_, _idx_)@ which moves the specified model to the given index of the models array. It will bail if the given model is not actually in the collection already.
+
+It will, on these occasions, fire a @move@ event on the collection with the parameters @_model_, _idx_@.
+
+h2. Backbone.OrderableView
+
+Provides a somewhat-opinionated basic view that handles automatic rendering and removal of models on @add@ and @remove@, as well as handles external @move@ events on the collection. Assumes models go directly within the collection DOM element; if this is not the case then @_addOneView_@ and @_move_@ should both be overriden with custom implementation.
+
+h2. license
+
+"WTFPL":http://www.wtfpl.net/txt/copying/
+
