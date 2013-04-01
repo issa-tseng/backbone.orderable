@@ -1,8 +1,8 @@
 var Backbone = require('backbone');
-var Reorderable = require('../backbone.collection.reorderable');
+var OrderableCollection = require('../backbone.orderable').OrderableCollection;
 
 var BasicModel = Backbone.Model.extend({});
-var OrderableCollection = Reorderable.extend({
+var OrderableCollection = OrderableCollection.extend({
     model: BasicModel
 });
 
