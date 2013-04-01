@@ -91,7 +91,7 @@
         _move: function(model, idx)
         {
             var modelEl = this._views[model.cid].el;
-            this.$el.find('> :nth-child(' + idx + ')').before(modelEl);
+            this.$el.children(':nth-child(' + (idx + 1) + ')').before(modelEl);
         },
 
         // remove an model. pretty self-explanatory
