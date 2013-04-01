@@ -12,7 +12,7 @@
         define([ 'underscore', 'backbone' ], factory);
     else if (typeof require === 'function')
         // Non-AMD CommonJS
-        factory(require('underscore'), require('Backbone'));
+        factory(require('underscore'), require('backbone'));
     else
         // globals
         factory(_, Backbone);
