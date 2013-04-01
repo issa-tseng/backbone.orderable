@@ -46,7 +46,12 @@ var PeopleView = Backbone.OrderableView.extend({
         });
     },
 
-    _move: function(model, idx) { },
+    _move: function(model, idx)
+    {
+
+        var li = this._views[model.cid].$el.closest('li');
+        this.$el.find('> :nth-child(' + (idx + 1) + ')').before(li);
+    },
 
     removeClicked: function(event)
     {
