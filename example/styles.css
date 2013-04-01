@@ -1,0 +1,63 @@
+body
+{
+    font-family: 'Helvetica Neue', Helvetica, Arial;
+    font-size: 62.5%;
+}
+
+h1
+{
+    letter-spacing: -1px;
+    margin-top: 3em;
+}
+
+.interactive
+{
+    border: 1px solid #000;
+    max-width: 40em;
+}
+
+.interactive ul
+{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.interactive ul li
+{
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+    border-top: 1px solid #eee;
+    cursor: move;
+    margin: 0;
+    padding: 1em 3em;
+    position: relative;
+}
+
+.interactive ul li .person
+{
+    font-size: 2em;
+}
+
+.interactive ul li .remove
+{
+    color: #888;
+    font-size: 1.2em;
+    margin-top: -0.7em;
+    position: absolute;
+    right: 2em;
+    text-decoration: none;
+    top: 50%;
+}
+
+.interactive ul li .remove:hover
+{
+    color: #555;
+}
+
+.canonical
+{
+    font-family: Monaco, Menlo, 'Courier New', monospace;
+    font-size: 1.3em;
+}
+

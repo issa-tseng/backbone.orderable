@@ -65,20 +65,13 @@
             this.collection.on('remove', function(model) { self._removeOne(model); });
         },
 
-        // helper method to grab rendered elements as an array. since
-        // we prerender, all we have to do is return the elements.
-        renderCollection: function()
-        {
-            return _.pluck(this._views, 'el');
-        },
-
         // prerender and track a model
         _addOne: function(model)
         {
             var view = new this.options.instanceView({ model: model });
             this._views[model.cid] = view;
 
-            this._addOneView(view);
+            this._addOneView(view, model);
             view.render();
         },
 
@@ -86,7 +79,7 @@
         // so that it's easy to override. if you want to eg bind drag
         // events or add a remove button to the item, this is a great place
         // to do it.
-        _addOneView: function(view)
+        _addOneView: function(view, model)
         {
             this.$el.append(view.$el);
         },
@@ -98,7 +91,7 @@
         _move: function(model, idx)
         {
             var modelEl = this._views[model.cid].el;
-            this.$el.find('> :nth-child(' + (idx - 1) + ')').after(modelEl);
+            this.$el.find('> :nth-child(' + idx + ')').before(modelEl);
         },
 
         // remove an model. pretty self-explanatory
@@ -111,6 +104,7 @@
             delete this._views[model.cid];
         }
     });
+    Backbone.OrderableView = OrderableView;
 
     if (typeof module != 'undefined')
     {
