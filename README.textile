@@ -12,6 +12,10 @@ h2. Backbone.OrderableView
 
 Provides a somewhat-opinionated basic view that handles automatic rendering and removal of models on @add@ and @remove@, as well as handles external @move@ events on the collection. Assumes models go directly within the collection DOM element; if this is not the case then @_addOneView@ and @_move@ should both be overriden with custom implementation.
 
+h2. example
+
+An example implementation using my own "awesomereorder":https://github.com/clint-tseng/awesomereorder jQuery plugin can be found in the @examples/@ directory. That example can be found on the web "here":http://selene.antinod.es/dev/backbone.orderable/example/index.html .
+
 h2. license
 
 "WTFPL":http://www.wtfpl.net/txt/copying/
